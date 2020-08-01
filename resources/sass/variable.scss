@@ -1,7 +1,7 @@
 // element ui variable
 @import '~element-ui/packages/theme-chalk/src/common/var.scss';
 
-// override
+// element-ui override
 $--color-primary: #F3A353;
 $--color-primary-light-1: mix($--color-white, $--color-primary, 10%);
 $--color-primary-light-2: mix($--color-white, $--color-primary, 20%);
@@ -16,3 +16,53 @@ $--color-primary-light: #F7C593;
 $--color-primary-dark: #D78636;
 $--color-success: #40C9C0;
 $--color-warning: #7D84B2;
+
+// boostrap
+$theme-colors: () !default;
+$theme-colors: map-merge((
+  "primary":    $--color-primary,
+  "secondary":  $--color-text-secondary,
+  "success":    $--color-success,
+  "info":       $--color-info,
+  "warning":    $--color-warning,
+  "danger":     $--color-danger,
+  "placeholder":$--color-text-placeholder,
+), $theme-colors);
+
+$h1-font-size: 24px !default;
+$h2-font-size: 20px !default;
+$h3-font-size: 18px !default;
+$h4-font-size: 16px !default;
+$h5-font-size: 14px !default;
+$h6-font-size: 12px !default;
+
+$font-weight-light:           300 !default;
+$font-weight-normal:          400 !default;
+$font-weight-bold:            700 !default;
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px
+) !default;
+
+$spacer: 1rem !default;
+$spacers: () !default;
+$spacers: map-merge((
+  0: 0,
+  1: ($spacer * .25),
+  2: ($spacer * .5),
+  3: $spacer,
+  4: ($spacer * 1.5),
+  5: ($spacer * 3)
+), $spacers);
+
+$sizes: () !default;
+$sizes: map-merge((
+  25: 25%,
+  50: 50%,
+  75: 75%,
+  100: 100%
+), $sizes);
