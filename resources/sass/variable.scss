@@ -1,0 +1,18 @@
+// element ui variable
+@import '~element-ui/packages/theme-chalk/src/common/var.scss';
+
+// override
+$--color-primary: #F3A353;
+$--color-primary-light-1: mix($--color-white, $--color-primary, 10%);
+$--color-primary-light-2: mix($--color-white, $--color-primary, 20%);
+$--color-primary-light-3: mix($--color-white, $--color-primary, 30%);
+$--color-primary-light-4: mix($--color-white, $--color-primary, 40%);
+$--color-primary-light-5: mix($--color-white, $--color-primary, 50%);
+$--color-primary-light-6: mix($--color-white, $--color-primary, 60%);
+$--color-primary-light-7: mix($--color-white, $--color-primary, 70%);
+$--color-primary-light-8: mix($--color-white, $--color-primary, 80%);
+$--color-primary-light-9: mix($--color-white, $--color-primary, 90%);
+$--color-primary-light: #F7C593;
+$--color-primary-dark: #D78636;
+$--color-success: #40C9C0;
+$--color-warning: #7D84B2;

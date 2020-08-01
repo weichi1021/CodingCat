@@ -1,0 +1,53 @@
+@import '../../sass/variable';
+
+.login {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  &:before {
+    content: '';
+    position: fixed;
+    top: -40vh;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    transform: skew(0, -15deg);
+    background: transparent linear-gradient(185deg, $--color-primary-light 0%, $--color-primary-dark 100%) 0% 0% no-repeat;
+  }
+  &__form {
+    position: relative;
+    z-index: 9;
+    padding: 55px 80px 20px;
+    max-width: 300px;
+    max-height: 560px;
+    box-shadow: 0px 0px 50px #B9B9B940;
+    border-radius: $--border-radius-base;
+    color: $--color-text-secondary;
+    background-color: $--color-white;
+  }
+  &__title {
+    font-size: $--font-size-extra-large;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  &__input > input {
+    margin-bottom: 20px;
+  }
+  &__chkbox {
+    color: $--color-text-secondary;
+    margin-bottom: 30px;
+  }
+  &__btn {
+    width: 100%;
+    display: block;
+    margin-bottom: 60px;
+  }
+  &__copyright {
+    text-align: center;
+    font-size: $--font-size-extra-small;
+    color: $--color-text-placeholder;
+  }
+}
