@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Auth;
 
 class APIMiddleware
 {
@@ -15,6 +16,14 @@ class APIMiddleware
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
+        $token = $request->bearerToken();
+        $user = \App\User::where('api_token', $token)->first();
+        if ($user) {
+            Auth::login($user);
+            return $next($request);
+        }
+        return response([
+            'message' => 'Unauthenticated.'
+        ], 403);
     }
 }
