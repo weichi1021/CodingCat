@@ -13,5 +13,5 @@ const config = require('./webpack.config')
  */
 
 mix
-.sass('resources/sass/style.scss', 'public/css')
+.sass('resources/scss/style.scss', 'public/css')
 .webpackConfig(config);
