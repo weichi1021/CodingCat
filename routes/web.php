@@ -21,4 +21,4 @@ Route::get('/admin/login', function () {
     return view('login/index');
 });
 
-Route::post('login', 'LoginController@login');
+Route::post('/login', 'LoginController@login');
