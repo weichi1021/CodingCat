@@ -17,15 +17,14 @@ class LoginController extends Controller
             'account'   => $account,
             'password'  => $password,
         ]);
-
-        $user = Auth::user();
-        $data = [
-            'name'      => $user->name,
-            'account'   => $user->account,
-            'token'     => $user->api_token,
-        ];
-
+        
         if ($attempt) {
+            $user = Auth::user();
+            $data = [
+                'name'      => $user->name,
+                'account'   => $user->account,
+                'token'     => $user->api_token,
+            ];
             return response([
                 'data' => $data
             ], 200);
