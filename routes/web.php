@@ -17,4 +17,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('login', 'LoginController@login');
+Route::prefix('api')->post('login', 'LoginController@login');
