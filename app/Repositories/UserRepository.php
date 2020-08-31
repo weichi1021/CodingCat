@@ -19,9 +19,34 @@ class UserRepository extends BaseRepository
      */
     public function updateToken($uid, $newToken)
     {
-        return $this->model->where('id', $uid)->update([
+        return $this->model
+            ->where('id', $uid)->update([
             'api_token' => $newToken
         ]);
+    }
+
+    /**
+     * @return Builder[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public function getUsers()
+    {
+        return $this->model
+            ->orderBy('id')->get();
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function deleteUser($id)
+    {
+        return $this->model
+            ->where('id', $id)->delete();
+    }
+
+    public function testUser()
+    {
+
     }
 
 }

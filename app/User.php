@@ -33,4 +33,8 @@ class User extends Authenticatable
         'password',
     ];
 
+    public function test()
+    {
+        return $this->hasOne(Articles::class);
+    }
 }
