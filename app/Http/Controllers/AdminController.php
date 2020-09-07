@@ -14,9 +14,13 @@ class AdminController extends Controller
         $this->adminService = $adminService;
     }
 
-    public function addUser()
+    public function addUser(Request $request)
     {
+        $data = $request->all();
 
+        return response(
+            $this->adminService->createUser($data)
+        );
     }
 
     public function getUserList()
@@ -26,9 +30,13 @@ class AdminController extends Controller
         );
     }
 
-    public function updateUser()
+    public function updateUser(Request $request)
     {
+        $data = $request->all();
 
+        return response(
+            $this->adminService->updateUser($data)
+        );
     }
 
     public function deleteUser(Request $request)

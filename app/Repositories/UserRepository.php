@@ -35,6 +35,39 @@ class UserRepository extends BaseRepository
     }
 
     /**
+     * @param $uid
+     * @return Builder|Model|object|null
+     */
+    public function getUser($uid)
+    {
+        return $this->model
+            ->where('id', $uid)
+            ->first();
+    }
+
+    /**
+     * @param $user
+     * @return bool
+     */
+    public function createUser($user)
+    {
+        return $this->model
+            ->insert($user);
+    }
+
+    /**
+     * @param $uid
+     * @param $data
+     * @return int
+     */
+    public function updateUser($uid, $data)
+    {
+        return $this->model
+            ->where('id', $uid)
+            ->update($data);
+    }
+
+    /**
      * @param $id
      * @return mixed
      */
@@ -42,11 +75,6 @@ class UserRepository extends BaseRepository
     {
         return $this->model
             ->where('id', $id)->delete();
-    }
-
-    public function testUser()
-    {
-
     }
 
 }
