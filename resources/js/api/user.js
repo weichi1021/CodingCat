@@ -3,7 +3,7 @@ import { setCookie, getCookie } from '@utils/cookie'
 
 class User {
   constructor () {
-    this.token = getCookie('user-token')
+    this.token = getCookie('user-token') || null
   }
 
   /**
@@ -37,12 +37,12 @@ class User {
     try {
       const resp = await axios.get('/api/admin/user_list', {
         headers: {
-          Token: this.token
+          Authorization: `Bearer ${this.token}`
         }
       })
       return resp.data
     } catch (error) {
-
+      throw (error.response.data)
     }
   }
 }
