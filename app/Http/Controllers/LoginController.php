@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\FunctionTrait\TokenTrait;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -10,6 +11,7 @@ use Illuminate\Support\Str;
 
 class LoginController extends Controller
 {
+    use TokenTrait;
     protected $userRepository;
 
     public function __construct(UserRepository $userRepository)
@@ -47,10 +49,8 @@ class LoginController extends Controller
 
     public function logout()
     {
-        $newToken = strtoupper(md5(Hash::make(Str::random(40))));
-        $user = Auth::user();
+        $result = $this->updateToken();
         Auth::logout();
-        $result = $this->userRepository->updateToken($user->getAuthIdentifier(), $newToken);
 
         if (!$result) {
             return response([

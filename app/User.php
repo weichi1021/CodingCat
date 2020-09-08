@@ -11,6 +11,13 @@ class User extends Authenticatable
     use Notifiable;
 
     /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = true;
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -33,4 +40,8 @@ class User extends Authenticatable
         'password',
     ];
 
+    public function test()
+    {
+        return $this->hasOne(Articles::class);
+    }
 }
