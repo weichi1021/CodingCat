@@ -68,7 +68,7 @@ export default {
       try {
         const valid = await this.$refs[formName].validate()
         const resp = await User.login(this.loginForm)
-        const path = getQueryString('redirect') || '/admin'
+        const path = getQueryString('redirect') || '/'
         console.log(valid, resp, path)
         this.$router.push(path)
       } catch (error) {

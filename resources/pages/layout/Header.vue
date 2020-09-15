@@ -16,19 +16,22 @@
       </template>
     </el-breadcrumb>
     <!-- Avatar -->
-    <el-dropdown>
+    <el-dropdown v-if="userInfo" @command="(command) => {$router.push(command)}">
       <div class="el-dropdown-link d-flex">
-        <el-avatar> user </el-avatar>
+        <el-avatar>{{ userInfo.name || 'User' }}</el-avatar>
       </div>
-      <el-dropdown-menu slot="dropdown">
-        <el-dropdown-item @click.native="btnLogout">Logout</el-dropdown-item>
+      <el-dropdown-menu slot="dropdown" :click="true">
+        <el-dropdown-item :command="`/users/${userInfo.id}`">
+          My Profile
+        </el-dropdown-item>
+        <el-dropdown-item :command="`/logout`" divided>Logout</el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
   </el-header>
 </template>
 
 <script>
-import User from '@api/User'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   data () {
@@ -38,23 +41,20 @@ export default {
   },
   created () {
     this.getPath(this.$route.path)
+    this.getUserInfo()
   },
   watch: {
     $route (to, from) {
       this.getPath(to.path)
     }
   },
+  computed: {
+    ...mapState(['userInfo'])
+  },
   methods: {
+    ...mapActions(['getUserInfo']),
     getPath (path) {
       this.pathList = path.substr(1) ? path.substr(1).split('/') : []
-    },
-    async btnLogout () {
-      try {
-        await User.logout()
-        this.$router.push('/login')
-      } catch (error) {
-        console.log(error)
-      }
     }
   }
 }

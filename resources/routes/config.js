@@ -1,5 +1,6 @@
 // pages
 import Login from '@pages/login'
+import Logout from '@pages/logout'
 import Layout from '@pages/layout'
 import Home from '@pages/home'
 import Users from '@pages/users'
@@ -14,6 +15,11 @@ const config = [
     meta: {
       requiresAuth: false
     }
+  },
+  {
+    name: 'Logout',
+    path: '/logout',
+    component: Logout
   },
   {
     name: 'Dashboard',
@@ -35,7 +41,7 @@ const config = [
       },
       {
         name: 'users-action',
-        path: '/users/:action(add|edit)',
+        path: '/users/:uid(add|\\d+)',
         component: UsersAction
       }
     ]
