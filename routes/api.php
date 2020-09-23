@@ -20,6 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::prefix('admin')->group(function (){
     Route::get('user_list', 'AdminController@getUserList');
+    Route::get('user', 'AdminController@getUser');
     Route::post('user_create', 'AdminController@addUser');
     Route::post('user_update', 'AdminController@updateUser');
     Route::get('user_delete', 'AdminController@deleteUser');
