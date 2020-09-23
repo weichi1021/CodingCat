@@ -23,6 +23,7 @@ class AdminService
             return [
                 'id'                        => $user->id,
                 'avatar'                    => $user->pic,
+                'account'                   => $user->account,
                 'name'                      => $user->name,
                 'description'               => $user->info,
                 'email'                     => $user->email,
@@ -65,13 +66,18 @@ class AdminService
         return $this->userRepository->deleteUser($id);
     }
 
+    public function searchUser($keyword)
+    {
+//        return $this->userRepository->searchUser($keyword);
+    }
+
     public function transformInputToSqlColumn($input, $oldData = null)
     {
         $originData = !empty($oldData) ? $oldData : null;
 
         return [
             'account'       => $input['account'] ?? ($originData['account'] ?? 'abc'),
-            'password'      => Hash::make($input['password'])?? $originData['password'],
+            'password'      => isset($input['password'])? Hash::make($input['password']) : $originData['password'],
             'name'          => $input['name'] ?? ($originData['name'] ?? 'AAA'),
             'pic'           => $input['avatar'] ?? $originData['pic'] ?? '',
             'info'          => $input['description'] ?? $originData['info'] ?? '',
