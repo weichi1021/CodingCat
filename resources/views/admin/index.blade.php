@@ -7,5 +7,5 @@
 @stop
 
 @section('footer')
-    <script src="{{ asset('js/login.js') }}"></script>
+    <script src="{{ asset('js/admin.js') }}"></script>
 @stop

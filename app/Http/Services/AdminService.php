@@ -16,6 +16,23 @@ class AdminService
         $this->userRepository = $userRepository;
     }
 
+    public function getUserById($uid)
+    {   
+        $user = $this->userRepository->getUser($uid);
+        return [
+            'id'                        => $user->id,
+            'avatar'                    => $user->pic,
+            'name'                      => $user->name,
+            'account'                   => $user->account,
+            'description'               => $user->info,
+            'email'                     => $user->email,
+            'github'                    => $user->github,
+            'facebook'                  => $user->facebook,
+            'created_datetime'          => $user->created_at,
+            'last_modified_datetime'    => $user->updated_at
+        ];
+    }
+
     public function getUsers()
     {
         // TODO: Articles Total(need to join articles sql), Link, Role
@@ -24,6 +41,7 @@ class AdminService
                 'id'                        => $user->id,
                 'avatar'                    => $user->pic,
                 'name'                      => $user->name,
+                'account'                   => $user->account,
                 'description'               => $user->info,
                 'email'                     => $user->email,
                 'github'                    => $user->github,

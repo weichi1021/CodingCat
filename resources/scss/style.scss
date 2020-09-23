@@ -10,3 +10,39 @@ body {
   font-size: 1rem;
   font-family: 'Roboto', 'Open Sans', sans-serif;
 }
+* {
+  font-family: 'Roboto', 'Open Sans', sans-serif;
+}
+
+// override
+.el-form-item__error:first-letter {
+  text-transform: uppercase;
+}
+.el-menu {
+  background-color: $--color-menu-backgroud;
+  .el-menu-item {
+    background-color: $--color-menu-backgroud;
+    color: $--color-white;
+  }
+  .is-active {
+    color: $--color-primary;
+  }
+}
+.el-form {
+  max-width: 400px;
+}
+
+.cc-navbar {
+  z-index: 1;
+  box-shadow: 0 1px 4px rgba(0,21,41,.08);
+}
+.cc-menu__icon {
+  width: 1rem !important;
+  text-align: center;
+}
+.cc-main {
+  height: calc(100vh - 55px);
+  min-height: calc(100vh - 55px);
+  background-color: $--color-backgroud;
+  overflow-y: auto;
+}

@@ -117,6 +117,7 @@ $positions: static, relative, absolute, fixed, sticky;
 .text-lowercase  { text-transform: lowercase !important; }
 .text-uppercase  { text-transform: uppercase !important; }
 .text-capitalize { text-transform: capitalize !important; }
+.text-first-uppercase::first-letter { text-transform: uppercase !important; }
 
 // Text Weight and italics
 .font-weight-light  { font-weight: $font-weight-light !important; }
