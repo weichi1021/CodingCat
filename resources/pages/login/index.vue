@@ -11,12 +11,14 @@
           <el-input
             placeholder="Account"
             autoFocus
+            @keyup.enter.native="submitForm('loginForm')"
             v-model="loginForm.account"></el-input>
         </el-form-item>
         <el-form-item prop="password">
           <el-input
             type="password"
             placeholder="Password"
+            @keyup.enter.native="submitForm('loginForm')"
             :show-message="true"
             v-model="loginForm.password"></el-input>
         </el-form-item>
@@ -33,7 +35,8 @@
 </template>
 
 <script>
-import User from '../../js/api/User'
+import { getQueryString } from '@utils/url'
+import User from '@api/User'
 
 export default {
   data () {
@@ -65,7 +68,9 @@ export default {
       try {
         const valid = await this.$refs[formName].validate()
         const resp = await User.login(this.loginForm)
-        console.log(valid, resp)
+        const path = getQueryString('redirect') || '/'
+        console.log(valid, resp, path)
+        this.$router.push(path)
       } catch (error) {
         this.$message.error('Failed to login.')
         console.log(error)

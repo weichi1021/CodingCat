@@ -1,0 +1,19 @@
+
+@import '../../scss/variable';
+
+.avatar-uploader .el-upload {
+  border: 1px dashed $--border-color-base;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  color: $--color-info;
+  width: 70px;
+  height: 70px;
+  line-height: 70px;
+  text-align: center;
+  border-radius: 50%;
+}
+.avatar-uploader .el-upload:hover {
+  border-color: $--color-primary;
+}

@@ -4,10 +4,16 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const config = {
   resolve: {
     extensions: ['.vue', '.js'],
+    alias: {
+      '@api': path.resolve(__dirname, './resources/js/api'),
+      '@components': path.resolve(__dirname, './resources/pages/components'),
+      '@pages': path.resolve(__dirname, './resources/pages'),
+      '@utils': path.resolve(__dirname, './resources/js/utils'),
+    },
   },
   entry: {
     'app': './resources/js/app.js',
-    'login': './resources/pages/login/index.js',
+    'admin': './resources/pages/admin/index.js',
   },
   output: {
     path: path.resolve(__dirname, 'public'),

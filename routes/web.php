@@ -17,9 +17,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
-Route::get('/admin/login', function () {
-    return view('login/index');
+Route::get('/admin/{any?}/{all?}', function () {
+    return view('admin/index');
 });
 
 Route::prefix('api')->post('login', 'LoginController@login');

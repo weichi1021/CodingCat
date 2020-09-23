@@ -30,6 +30,15 @@ class AdminController extends Controller
         );
     }
 
+    public function getUser(Request $request)
+    {
+        $uid = $request->get('uid');
+
+        return response(
+            $this->adminService->getUserById($uid)
+        );
+    }
+
     public function updateUser(Request $request)
     {
         $data = $request->all();
