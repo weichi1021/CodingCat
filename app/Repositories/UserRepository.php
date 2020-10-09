@@ -4,6 +4,7 @@ namespace App\Repositories;
 use App\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class UserRepository extends BaseRepository
 {
@@ -75,6 +76,17 @@ class UserRepository extends BaseRepository
     {
         return $this->model
             ->where('id', $id)->delete();
+    }
+
+    public function searchUser($keyword)
+    {
+        $sql = 'select * from users where id = \''.$keyword.'\'
+                union
+                select * from users where name like \'%'.$keyword.'%\'
+                union
+                select * from users where email like \'%'.$keyword.'%\'';
+
+        return DB::select($sql);
     }
 
 }
