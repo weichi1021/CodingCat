@@ -84,7 +84,10 @@ class UserRepository extends BaseRepository
                 union
                 select * from users where name like \'%'.$keyword.'%\'
                 union
-                select * from users where email like \'%'.$keyword.'%\'';
+                select * from users where email like \'%'.$keyword.'%\'
+                union
+                select * from users where account like \'%'.$keyword.'%\'
+                ';
 
         return DB::select($sql);
     }
