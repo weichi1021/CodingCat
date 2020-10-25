@@ -30,6 +30,8 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             'name'      => 'Vicky',
             'account'   => 'vicky',
+            'email'     => 'fu3810299@gmail.com',
+            'github'     => 'https://github.com/weichi1021',
             'pic'       => null,
             'info'      => null,
             'api_token' => Str::random(40),
