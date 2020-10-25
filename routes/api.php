@@ -26,7 +26,9 @@ Route::prefix('admin')->group(function (){
     Route::get('user_delete', 'AdminController@deleteUser');
     // category
     Route::get('category_list', 'CategoryController@getCategoryList');
-    Route::post('category', 'CategoryController@getCategoryById');
+    Route::get('category', 'CategoryController@getCategoryById');
+    Route::post('category_update', 'CategoryController@updateOrCreateCategory');
+    Route::get('category_delete', 'CategoryController@deleteCategory');
 });
 
 Route::get('logout', 'LoginController@logout');

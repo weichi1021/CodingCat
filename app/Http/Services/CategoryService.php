@@ -2,6 +2,7 @@
 
 namespace App\Http\Services;
 
+
 use App\Repositories\UserRepository;
 use App\Repositories\CategoryRepository;
 
@@ -49,4 +50,37 @@ class CategoryService
         ];
     }
 
+    public function updateOrCreateCategory($user, $categoryId, $categoryName) 
+    {
+        $category = $this->categoryRepository->getCategoryById($categoryId);
+        $data = [
+            'name'         => $categoryName,
+            'updated_user' => $user->id
+        ];
+        if($category === null) {
+            return $this->categoryRepository->createCategory(
+                $this->transformInputToSqlColumn($data)
+            );
+        }else{
+            return $this->categoryRepository->updateCategory(
+                $categoryId, 
+                $this->transformInputToSqlColumn($data)
+            );
+        }
+    }
+
+    public function deleteCategory($categoryId) 
+    {
+        return $this->categoryRepository->deleteCategory($categoryId);
+    }
+
+    public function transformInputToSqlColumn($input, $oldData = null)
+    {
+        $originData = !empty($oldData) ? $oldData : null;
+
+        return [
+            'name'          => $input['name'] ?? ($originData['name'] ?? 'Name'),
+            'updated_user'  => $input['updated_user'] ?? ($originData['updated_user'] ?? 1)
+        ];
+    }
 }
