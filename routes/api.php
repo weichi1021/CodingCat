@@ -24,6 +24,9 @@ Route::prefix('admin')->group(function (){
     Route::post('user_create', 'AdminController@addUser');
     Route::post('user_update', 'AdminController@updateUser');
     Route::get('user_delete', 'AdminController@deleteUser');
+    // category
+    Route::get('category_list', 'CategoryController@getCategoryList');
+    Route::post('category', 'CategoryController@getCategoryById');
 });
 
 Route::get('logout', 'LoginController@logout');
