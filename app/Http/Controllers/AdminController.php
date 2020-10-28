@@ -56,4 +56,13 @@ class AdminController extends Controller
             $this->adminService->destroyUser($uid)
         );
     }
+
+    public function searchUser(Request $request)
+    {
+        $keyword = $request->get('keyword');
+
+        return response(
+            $this->adminService->searchUser($keyword)
+        );
+    }
 }

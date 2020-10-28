@@ -5,6 +5,7 @@ namespace App\Http\Services;
 use App\Http\FunctionTrait\TokenTrait;
 use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Hash;
+use PhpParser\Node\Expr\Array_;
 
 class AdminService
 {
@@ -40,6 +41,7 @@ class AdminService
             return [
                 'id'                        => $user->id,
                 'avatar'                    => $user->pic,
+                'account'                   => $user->account,
                 'name'                      => $user->name,
                 'account'                   => $user->account,
                 'description'               => $user->info,
@@ -83,13 +85,27 @@ class AdminService
         return $this->userRepository->deleteUser($id);
     }
 
+    public function searchUser($keyword)
+    {
+        /**
+         * @var Array_ $sqlSearchColumn
+         */
+        $sqlSearchColumn = $this->userRepository->searchUser($keyword);
+        $data = [];
+        foreach ($sqlSearchColumn as $sqlColumn) {
+            $data[] = $this->transformSqlColumnToOutput($sqlColumn);
+        }
+
+        return $data;
+    }
+
     public function transformInputToSqlColumn($input, $oldData = null)
     {
         $originData = !empty($oldData) ? $oldData : null;
 
         return [
             'account'       => $input['account'] ?? ($originData['account'] ?? 'abc'),
-            'password'      => Hash::make($input['password'])?? $originData['password'],
+            'password'      => isset($input['password'])? Hash::make($input['password']) : $originData['password'],
             'name'          => $input['name'] ?? ($originData['name'] ?? 'AAA'),
             'pic'           => $input['avatar'] ?? $originData['pic'] ?? '',
             'info'          => $input['description'] ?? $originData['info'] ?? '',
@@ -97,6 +113,21 @@ class AdminService
             'github'        => $input['github'] ?? $originData['github'] ?? '',
             'facebook'      => $input['facebook'] ?? $originData['facebook'] ?? '',
             'api_token'     => $input['api_token'] ?? $originData['api_token'] ?? $this->generateToken()
+        ];
+    }
+
+    public function transformSqlColumnToOutput($sqlColumn)
+    {
+        return [
+            'id'                        => $sqlColumn->id,
+            'avatar'                    => $sqlColumn->account,
+            'name'                      => $sqlColumn->name,
+            'description'               => $sqlColumn->info,
+            'email'                     => $sqlColumn->email,
+            'github'                    => $sqlColumn->github,
+            'facebook'                  => $sqlColumn->facebook,
+            'created_datetime'          => $sqlColumn->created_at,
+            'last_modified_datetime'    => $sqlColumn->updated_at
         ];
     }
 }
