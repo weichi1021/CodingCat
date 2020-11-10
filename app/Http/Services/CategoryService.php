@@ -17,34 +17,42 @@ class CategoryService
         $this->categoryRepository = $categoryRepository;
     }
 
-    public function getCategoryList()
+    public function getCategoryList($page)
     {   
-        return $this->categoryRepository->getCategoryList()->transform(function ($category) {
-            $updated_user = $this->userRepository->getUser($category->updated_user);
+        $results = $this->categoryRepository->getCategoryList($page);
+        $data = $results->transform(function ($category) {
             return [
                 'id'                        => $category->id,
                 'name'                      => $category->name,
                 'created_datetime'          => $category->created_at,
                 'last_modifyied_user'       => [
-                    'user_id'  =>  $updated_user->id,
-                    'name'     =>  $updated_user->name,
+                    'user_id'  =>  $category->user->id,
+                    'name'     =>  $category->user->name,
                 ],
                 'last_modified_datetime'    => $category->updated_at
             ];
         });
+        return [
+            'total'                         => $results->total(),
+            'page'                          => [
+                'per_page'      =>  $results->perPage(),
+                'current_page'  =>  $results->currentPage(),
+                'last_page'     =>  $results->lastPage(),
+            ],
+            'data'                          =>  $data
+        ];
     }
 
     public function getCategoryById($categoryId) 
     {
         $category = $this->categoryRepository->getCategoryById($categoryId);
-        $updated_user = $this->userRepository->getUser($category->updated_user);
         return [
             'id'                        => $category->id,
             'name'                      => $category->name,
             'created_datetime'          => $category->created_at,
             'last_modifyied_user'       => [
-                'user_id'  =>  $updated_user->id,
-                'name'     =>  $updated_user->name,
+                'user_id'  =>  $category->user->id,
+                'name'     =>  $category->user->name,
             ],
             'last_modified_datetime'    => $category->updated_at
         ];

@@ -15,10 +15,12 @@ class CategoryController extends Controller
         $this->categoryService = $categoryService;
     }
 
-    public function getCategoryList()
+    public function getCategoryList(Request $request)
     {
+        $page = $request->get('page') ?? 1;
+
         return response(
-            $this->categoryService->getCategoryList()
+            $this->categoryService->getCategoryList($page)
         );
     }
 

@@ -4,6 +4,7 @@ namespace App\Repositories;
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Support\JsonableInterface;
 
 class CategoryRepository extends BaseRepository
 {
@@ -15,16 +16,24 @@ class CategoryRepository extends BaseRepository
     /**
      * @return Builder[]|\Illuminate\Database\Eloquent\Collection
      */
-    public function getCategoryList()
+    public function getCategoryList($page)
     {
         return $this->model
-            ->orderBy('id')->get();
+            ->with('user')
+            ->orderBy('id')
+            ->paginate(
+                5, // per page (may be get it from request)
+                ['*'], // columns to select from table (default *, means all fields)
+                'page', // page name that holds the page number in the query string
+                $page // current page, default 1
+            );
     }
 
 
     public function getCategoryById($categoryId)
     {
         return $this->model
+            ->with('user')
             ->where('id', $categoryId)
             ->first();
     }
@@ -37,14 +46,6 @@ class CategoryRepository extends BaseRepository
     {
         return $this->model
             ->insert($data);
-
-        // if ($category !== null) {
-        //     return $category->update($data);
-        // } else {
-        //     return Category::create($data);
-        // }
-                    
-        // return Category::updateOrCreate($data);
     }
 
     /**

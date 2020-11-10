@@ -15,7 +15,13 @@ class Category extends Model
      * @var array
      */
     protected $fillable = [
+        'id',
         'name',
     ];
+
+    public function user()
+    {
+        return $this->hasOne('App\User', 'id', 'updated_user');
+    }
 
 }
