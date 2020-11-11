@@ -21,7 +21,7 @@ class Category extends Model
 
     public function user()
     {
-        return $this->hasOne('App\User', 'id', 'updated_user');
+        return $this->belongsTo('App\User', 'id', 'updated_user');
     }
 
 }
